@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class Quote {
+    private String symbol;
     @SerializedName("time")
     private String time;
     @SerializedName("ask_exchange")
@@ -24,7 +25,8 @@ public class Quote {
     @SerializedName("quote_conditions")
     List<String> quoteConditions;
 
-    public Quote(net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.quote.Quote quote) {
+    public Quote(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.quote.Quote quote) {
+        this.symbol = symbol;
         this.time = quote.getT().toString();
         this.askExchange = quote.getAx();
         this.askPrice = quote.getAp();

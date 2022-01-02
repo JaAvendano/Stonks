@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class Trade {
+    private String symbol;
     private String time;
     private String exchange;
     @SerializedName("trade_price")
@@ -19,7 +20,8 @@ public class Trade {
     private long tradeId;
     private String tape;
 
-    public Trade(net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.trade.Trade trade){
+    public Trade(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.trade.Trade trade){
+        this.symbol = symbol;
         this.time = trade.getT().toString();
         this.exchange = trade.getX();
         this.tradePrice = trade.getP();

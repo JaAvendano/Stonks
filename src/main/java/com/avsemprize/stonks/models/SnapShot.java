@@ -16,8 +16,8 @@ public class SnapShot {
     @SerializedName("prev_daily_bar")
     private Bar previousDailyBar;
 
-    public SnapShot(net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot snapshot){
-        this.latestQuote = new Quote(snapshot.getLatestQuote());
+    public SnapShot(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot snapshot){
+        this.latestQuote = new Quote(symbol, snapshot.getLatestQuote());
         this.latestTrade = new Trade(snapshot.getLatestTrade());
         this.minuteBar = new Bar(snapshot.getMinuteBar());
         this.dailyBar = new Bar(snapshot.getDailyBar());

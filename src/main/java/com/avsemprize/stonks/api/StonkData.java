@@ -35,7 +35,7 @@ public class StonkData {
             e.printStackTrace();
             quote = new QuotesResponse();
         }
-        return this.convertQuotesResponse(quote);
+        return this.convertQuotesResponse(symbol, quote);
     }
 
     public Quote getLatestQuote(String symbol){
@@ -46,7 +46,7 @@ public class StonkData {
             e.printStackTrace();
             latestQuoteResponse = new LatestQuoteResponse();
         }
-        return new Quote(latestQuoteResponse.getQuote());
+        return new Quote(symbol, latestQuoteResponse.getQuote());
     }
 
     public Trade getLatestTrade(String symbol){
@@ -57,7 +57,7 @@ public class StonkData {
             e.printStackTrace();
             latestTradeResponse = new LatestTradeResponse();
         }
-        return new Trade(latestTradeResponse.getTrade());
+        return new Trade(symbol, latestTradeResponse.getTrade());
     }
 
     public List<Trade> getTrades(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, String pageToken){
@@ -73,7 +73,7 @@ public class StonkData {
             e.printStackTrace();
             tradesResponse = new TradesResponse();
         }
-        return this.convertTradeResponse(tradesResponse);
+        return this.convertTradeResponse(symbol, tradesResponse);
     }
 
 
@@ -106,7 +106,7 @@ public class StonkData {
             e.printStackTrace();
             snapshot = new net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot();
         }
-        return new SnapShot(snapshot);
+        return new SnapShot(symbol, snapshot);
 
     }
     public Map<String, SnapShot> getSnapshots(List<String> symbols){
@@ -123,14 +123,14 @@ public class StonkData {
     private Map<String, SnapShot> convertSnapshots(Map<String, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot> snapshots){
         Map<String, SnapShot> snaps = new HashMap<>();
         snapshots.forEach((key, value) ->{
-            snaps.put(key, new SnapShot(value));
+            snaps.put(key, new SnapShot(key, value));
         });
         return snaps;
     }
-    private List<Trade> convertTradeResponse(TradesResponse tradesResponse){
+    private List<Trade> convertTradeResponse(String symbol, TradesResponse tradesResponse){
         List<Trade> trades = new ArrayList<>();
         tradesResponse.getTrades().forEach(item ->{
-            Trade trade = new Trade(item);
+            Trade trade = new Trade(symbol, item);
             trades.add(trade);
         });
         return trades;
@@ -145,10 +145,10 @@ public class StonkData {
         return bars;
     }
 
-    private List<Quote> convertQuotesResponse(QuotesResponse response){
+    private List<Quote> convertQuotesResponse(String symbol, QuotesResponse response){
         List<Quote> quotes = new ArrayList<>();
         response.getQuotes().forEach(item ->{
-            Quote quote = new Quote(item);
+            Quote quote = new Quote(symbol, item);
             quotes.add(quote);
         });
         return quotes;
