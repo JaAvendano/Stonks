@@ -18,7 +18,7 @@ public class SnapShot {
 
     public SnapShot(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot snapshot){
         this.latestQuote = new Quote(symbol, snapshot.getLatestQuote());
-        this.latestTrade = new Trade(snapshot.getLatestTrade());
+        this.latestTrade = new Trade(symbol, snapshot.getLatestTrade());
         this.minuteBar = new Bar(snapshot.getMinuteBar());
         this.dailyBar = new Bar(snapshot.getDailyBar());
         this.previousDailyBar = new Bar(snapshot.getPrevDailyBar());
