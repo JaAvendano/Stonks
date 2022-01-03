@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 public class Bar {
 
+    private String symbol;
     private String time;
     @SerializedName("open_price")
     private double openPrice;
@@ -17,7 +18,8 @@ public class Bar {
     private double closePrice;
     private long volume;
 
-    public Bar(net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.Bar bar){
+    public Bar(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.Bar bar){
+        this.symbol = symbol;
         this.time = bar.getT().toString();
         this.openPrice = bar.getO();
         this.highPrice = bar.getH();

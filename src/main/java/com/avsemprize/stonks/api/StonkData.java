@@ -1,9 +1,6 @@
 package com.avsemprize.stonks.api;
 
-import com.avsemprize.stonks.models.Bar;
-import com.avsemprize.stonks.models.Quote;
-import com.avsemprize.stonks.models.SnapShot;
-import com.avsemprize.stonks.models.Trade;
+import com.avsemprize.stonks.models.*;
 import net.jacobpeterson.alpaca.AlpacaAPI;
 import net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.BarsResponse;
 import net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.enums.BarAdjustment;
@@ -27,7 +24,7 @@ public class StonkData {
         this.alpacaAPI = alpacaAPI;
     }
 
-    public List<Quote> getQuotes(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, String pageToken){
+    public Quotes getQuotes(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, String pageToken){
         QuotesResponse quote;
         try {
             quote = this.alpacaAPI.marketData().getQuotes(symbol, start, end, limit, pageToken);
@@ -35,7 +32,7 @@ public class StonkData {
             e.printStackTrace();
             quote = new QuotesResponse();
         }
-        return this.convertQuotesResponse(symbol, quote);
+        return new Quotes(quote);
     }
 
     public Quote getLatestQuote(String symbol){
@@ -60,7 +57,7 @@ public class StonkData {
         return new Trade(symbol, latestTradeResponse.getTrade());
     }
 
-    public List<Trade> getTrades(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, String pageToken){
+    public Trades getTrades(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, String pageToken){
         TradesResponse tradesResponse;
         try{
             tradesResponse = this.alpacaAPI.marketData().getTrades(
@@ -73,11 +70,11 @@ public class StonkData {
             e.printStackTrace();
             tradesResponse = new TradesResponse();
         }
-        return this.convertTradeResponse(symbol, tradesResponse);
+        return new Trades(tradesResponse);
     }
 
 
-    public List<Bar> getBars(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, int timeBarDurationPeriod , String pageToken){
+    public Bars getBars(String symbol, ZonedDateTime start, ZonedDateTime end, int limit, int timeBarDurationPeriod , String pageToken){
         BarsResponse barsResponse;
         try{
             barsResponse = this.alpacaAPI
@@ -95,7 +92,7 @@ public class StonkData {
             e.printStackTrace();
             barsResponse = new BarsResponse();
         }
-        return this.convertBarsResponse(barsResponse);
+        return new Bars(barsResponse);
     }
 
     public SnapShot getSnapShot(String symbol){
@@ -127,30 +124,8 @@ public class StonkData {
         });
         return snaps;
     }
-    private List<Trade> convertTradeResponse(String symbol, TradesResponse tradesResponse){
-        List<Trade> trades = new ArrayList<>();
-        tradesResponse.getTrades().forEach(item ->{
-            Trade trade = new Trade(symbol, item);
-            trades.add(trade);
-        });
-        return trades;
-    }
 
-    private List<Bar> convertBarsResponse(BarsResponse barsResponse){
-        List<Bar> bars = new ArrayList<>();
-        barsResponse.getBars().forEach(item ->{
-            Bar bar = new Bar(item);
-            bars.add(bar);
-        });
-        return bars;
-    }
 
-    private List<Quote> convertQuotesResponse(String symbol, QuotesResponse response){
-        List<Quote> quotes = new ArrayList<>();
-        response.getQuotes().forEach(item ->{
-            Quote quote = new Quote(symbol, item);
-            quotes.add(quote);
-        });
-        return quotes;
-    }
+
+
 }
