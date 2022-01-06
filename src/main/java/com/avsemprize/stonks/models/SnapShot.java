@@ -2,8 +2,10 @@ package com.avsemprize.stonks.models;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SnapShot {
     @SerializedName("latest_quote")
     private Quote latestQuote;
@@ -15,6 +17,7 @@ public class SnapShot {
     private Bar dailyBar;
     @SerializedName("prev_daily_bar")
     private Bar previousDailyBar;
+
 
     public SnapShot(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot snapshot){
         this.latestQuote = new Quote(symbol, snapshot.getLatestQuote());
