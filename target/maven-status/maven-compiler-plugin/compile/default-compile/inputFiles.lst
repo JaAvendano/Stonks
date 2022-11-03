@@ -1,0 +1,13 @@
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/api/StonkPortfolioHistory.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/api/StonkOrder.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Quote.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Bar.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Trade.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/api/StonkPosition.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/SnapShot.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Quotes.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/api/StonkData.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Bars.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/models/Trades.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/service/StonkService.java
+/home/mojoncaliente/Documents/workspace-sts-3.9.9.RELEASE/Stonks/src/main/java/com/avsemprize/stonks/api/StonkWatchList.java
