@@ -22,14 +22,10 @@ public class Trade {
     private long tradeId;
     private String tape;
 
-    public Trade(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.trade.Trade trade){
+    public Trade(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.common.historical.trade.Trade trade){
         this.symbol = symbol;
-        this.time = trade.getT().toString();
-        this.exchange = trade.getX();
-        this.tradePrice = trade.getP();
-        this.tradeSize = trade.getS();
-        this.tradeConditions = trade.getC();
-        this.tradeId = trade.getI();
-        this.tape = trade.getZ();
+        this.time = trade.getTimestamp().toString();
+        this.tradePrice = trade.getPrice();
+        this.tradeId = trade.getTradeID();
     }
 }

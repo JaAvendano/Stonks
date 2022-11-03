@@ -1,6 +1,6 @@
 package com.avsemprize.stonks.service;
 
-import com.avsemprize.stonks.api.*;
+import com.avsemprize.stonks.worker.*;
 import net.jacobpeterson.alpaca.AlpacaAPI;
 
 public class StonkService {

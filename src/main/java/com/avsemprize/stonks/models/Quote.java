@@ -27,15 +27,10 @@ public class Quote {
     @SerializedName("quote_conditions")
     List<String> quoteConditions;
 
-    public Quote(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.quote.Quote quote) {
+    public Quote(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.common.historical.quote.Quote quote) {
         this.symbol = symbol;
-        this.time = quote.getT().toString();
-        this.askExchange = quote.getAx();
-        this.askPrice = quote.getAp();
-        this.askSize = quote.getAs();
-        this.bidExchange = quote.getBx();
-        this.bidPrice = quote.getBp();
-        this.bidSize = quote.getBs();
-        this.quoteConditions = quote.getC();
+        this.time = quote.getTimestamp().toString();
+        this.askPrice = quote.getAskPrice();
+        this.bidPrice = quote.getBidPrice();
     }
 }

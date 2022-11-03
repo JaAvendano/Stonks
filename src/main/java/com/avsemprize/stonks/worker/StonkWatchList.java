@@ -1,10 +1,9 @@
-package com.avsemprize.stonks.api;
+package com.avsemprize.stonks.worker;
 
 import net.jacobpeterson.alpaca.AlpacaAPI;
 import net.jacobpeterson.alpaca.model.endpoint.watchlist.Watchlist;
 import net.jacobpeterson.alpaca.rest.AlpacaClientException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StonkWatchList {
@@ -15,47 +14,38 @@ public class StonkWatchList {
     }
 
     public List<Watchlist> getAllWatchLists(){
-        List<Watchlist> watchlist;
+
         try{
-            watchlist = this.alpacaAPI.watchlist().get();
+            return this.alpacaAPI.watchlist().get();
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new ArrayList<>();
+            return null;
         }
-        return watchlist;
     }
 
     public Watchlist getWatchListById(String watchListId){
-        Watchlist watchlist;
+
         try{
-            watchlist = this.alpacaAPI.watchlist().get(watchListId);
+            return this.alpacaAPI.watchlist().get(watchListId);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new Watchlist();
+            return null;
         }
-        return watchlist;
     }
 
     public Watchlist addSecurityToWatchList(String watchListId){
-        Watchlist watchlist;
+
         try {
-            watchlist = this.alpacaAPI.watchlist().get(watchListId);
+            return this.alpacaAPI.watchlist().get(watchListId);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new Watchlist();
+            return null;
         }
-        return watchlist;
     }
 
     public Watchlist removeSecuritiesFromWatchList(String watchListId, String symbol){
-        Watchlist watchlist;
         try{
-            watchlist = this.alpacaAPI.watchlist().removeSymbol(watchListId, symbol);
+            return this.alpacaAPI.watchlist().removeSymbol(watchListId, symbol);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new Watchlist();
+            return null;
         }
-        return watchlist;
     }
 
     public void deleteWatchList(String watchListId){
@@ -67,24 +57,19 @@ public class StonkWatchList {
     }
 
     public Watchlist createWatchList(String watchListName, String[] symbols){
-        Watchlist watchlist;
         try{
-            watchlist = this.alpacaAPI.watchlist().create(watchListName, symbols);
+            return this.alpacaAPI.watchlist().create(watchListName, symbols);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new Watchlist();
+            return null;
         }
-        return watchlist;
     }
 
     public Watchlist updateWatchList(String watchListId, String watchListName, String[] symbols){
         Watchlist watchlist;
         try{
-            watchlist = this.alpacaAPI.watchlist().update(watchListId, watchListName, symbols);
+            return this.alpacaAPI.watchlist().update(watchListId, watchListName, symbols);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            watchlist = new Watchlist();
+            return null;
         }
-        return watchlist;
     }
 }

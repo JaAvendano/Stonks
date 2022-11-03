@@ -1,17 +1,16 @@
-package com.avsemprize.stonks.api;
+package com.avsemprize.stonks.worker;
 
 import net.jacobpeterson.alpaca.AlpacaAPI;
 import net.jacobpeterson.alpaca.model.endpoint.common.enums.SortDirection;
-import net.jacobpeterson.alpaca.model.endpoint.order.CancelledOrder;
-import net.jacobpeterson.alpaca.model.endpoint.order.Order;
-import net.jacobpeterson.alpaca.model.endpoint.order.enums.CurrentOrderStatus;
-import net.jacobpeterson.alpaca.model.endpoint.order.enums.OrderSide;
-import net.jacobpeterson.alpaca.model.endpoint.order.enums.OrderStatus;
-import net.jacobpeterson.alpaca.model.endpoint.order.enums.OrderTimeInForce;
+import net.jacobpeterson.alpaca.model.endpoint.orders.CancelledOrder;
+import net.jacobpeterson.alpaca.model.endpoint.orders.Order;
+import net.jacobpeterson.alpaca.model.endpoint.orders.enums.CurrentOrderStatus;
+import net.jacobpeterson.alpaca.model.endpoint.orders.enums.OrderSide;
+import net.jacobpeterson.alpaca.model.endpoint.orders.enums.OrderStatus;
+import net.jacobpeterson.alpaca.model.endpoint.orders.enums.OrderTimeInForce;
 import net.jacobpeterson.alpaca.rest.AlpacaClientException;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StonkOrder {
@@ -22,9 +21,9 @@ public class StonkOrder {
     }
 
     public List<Order> getOrders(List<String> symbols, int limit, ZonedDateTime start, ZonedDateTime end){
-        List<Order> orders;
+
         try{
-            orders = this.alpacaAPI.orders().get(
+            return this.alpacaAPI.orders().get(
                     CurrentOrderStatus.ALL,
                     limit,
                     start,
@@ -34,31 +33,25 @@ public class StonkOrder {
                     symbols
             );
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            orders = new ArrayList<>();
+            return null;
         }
-        return orders;
     }
 
-    public Order placeLimitOrder(String symbol, int quantity, OrderSide side, OrderTimeInForce orderTimeInForce, double limitPrice, boolean extendedHours){
+    public Order placeLimitOrder(String symbol, double quantity, OrderSide side, OrderTimeInForce orderTimeInForce, double limitPrice, boolean extendedHours){
         Order order;
         try{
-            order = this.alpacaAPI.orders().requestLimitOrder(symbol, quantity, side, orderTimeInForce, limitPrice, extendedHours);
+            return this.alpacaAPI.orders().requestLimitOrder(symbol, quantity, side, orderTimeInForce, limitPrice, extendedHours);
         }catch(AlpacaClientException e){
-            e.printStackTrace();
-            order = new Order();
+            return null;
         }
-        return order;
     }
     public Order placePartialOrder(String symbol, double quantity, OrderSide orderSide){
-        Order order;
+
         try{
-            order = this.alpacaAPI.orders().requestFractionalMarketOrder(symbol, quantity, orderSide);
+            return this.alpacaAPI.orders().requestFractionalMarketOrder(symbol, quantity, orderSide);
         }catch (AlpacaClientException e){
-            e.printStackTrace();
-            order = new Order();
+            return null;
         }
-        return order;
     }
 
     public Order updateOrder(Order order, int quantity, OrderTimeInForce timeInForce, double limitPrice){
@@ -81,14 +74,11 @@ public class StonkOrder {
         return order;
     }
     public List<CancelledOrder> cancelAllOrders(){
-        List<CancelledOrder> cancelledOrders;
         try{
-            cancelledOrders = this.alpacaAPI.orders().cancelAll();
+            return this.alpacaAPI.orders().cancelAll();
         }catch(AlpacaClientException e){
-            e.printStackTrace();
-            cancelledOrders = new ArrayList<>();
+            return null;
         }
-        return cancelledOrders;
     }
 
     public Order cancelOrderById(String orderId){

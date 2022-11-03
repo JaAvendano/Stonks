@@ -2,7 +2,7 @@ package com.avsemprize.stonks.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.BarsResponse;
+import net.jacobpeterson.alpaca.model.endpoint.marketdata.stock.historical.bar.StockBarsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +16,13 @@ public class Bars {
     private String nextPageToken;
 
 
-    public Bars(BarsResponse response){
-        this.symbol = response.getSymbol();
-        this.nextPageToken = response.getNextPageToken();
-        this.bars = this.convertBarsResponse(response);
+    public Bars(StockBarsResponse bars){
+        this.symbol = bars.getSymbol();
+        this.nextPageToken = bars.getNextPageToken();
+        this.bars = this.convertBarsResponse(bars);
     }
 
-    private List<Bar> convertBarsResponse(BarsResponse response){
+    private List<Bar> convertBarsResponse(StockBarsResponse response){
         List<Bar> bars = new ArrayList<>();
         if(response.getBars() != null){
             response.getBars().forEach(item ->{

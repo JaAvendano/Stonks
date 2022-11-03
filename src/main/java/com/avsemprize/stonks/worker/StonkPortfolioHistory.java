@@ -1,4 +1,4 @@
-package com.avsemprize.stonks.api;
+package com.avsemprize.stonks.worker;
 
 import net.jacobpeterson.alpaca.AlpacaAPI;
 import net.jacobpeterson.alpaca.model.endpoint.portfoliohistory.PortfolioHistory;

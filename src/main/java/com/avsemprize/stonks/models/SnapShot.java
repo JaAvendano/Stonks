@@ -3,6 +3,7 @@ package com.avsemprize.stonks.models;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.jacobpeterson.alpaca.model.endpoint.marketdata.stock.historical.snapshot.Snapshot;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class SnapShot {
     private Bar previousDailyBar;
 
 
-    public SnapShot(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.snapshot.Snapshot snapshot){
+    public SnapShot(String symbol, Snapshot snapshot){
         this.latestQuote = new Quote(symbol, snapshot.getLatestQuote());
         this.latestTrade = new Trade(symbol, snapshot.getLatestTrade());
         this.minuteBar = new Bar(symbol, snapshot.getMinuteBar());

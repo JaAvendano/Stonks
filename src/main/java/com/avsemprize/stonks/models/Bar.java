@@ -3,6 +3,7 @@ package com.avsemprize.stonks.models;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.jacobpeterson.alpaca.model.endpoint.marketdata.stock.historical.bar.StockBar;
 
 @Data
 @NoArgsConstructor
@@ -20,13 +21,13 @@ public class Bar {
     private double closePrice;
     private long volume;
 
-    public Bar(String symbol, net.jacobpeterson.alpaca.model.endpoint.marketdata.historical.bar.Bar bar){
+    public Bar(String symbol, StockBar bar){
         this.symbol = symbol;
-        this.time = bar.getT().toString();
-        this.openPrice = bar.getO();
-        this.highPrice = bar.getH();
-        this.lowPrice = bar.getL();
-        this.closePrice = bar.getC();
-        this.volume = bar.getV();
+        this.time = bar.getTimestamp().toString();
+        this.openPrice = bar.getOpen();
+        this.highPrice = bar.getHigh();
+        this.lowPrice = bar.getLow();
+        this.closePrice = bar.getClose();
+        this.volume = bar.getVolume();
     }
 }
